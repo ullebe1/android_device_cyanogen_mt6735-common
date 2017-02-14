@@ -93,7 +93,7 @@ public class MT6735 extends RIL implements CommandsInterface {
 
 
     protected void
-    processUnsolicited (Parcel p, i) {
+    processUnsolicited (Parcel p, int i) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
