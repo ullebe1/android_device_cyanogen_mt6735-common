@@ -92,9 +92,8 @@ public class MT6735 extends RIL implements CommandsInterface {
     }
 
 
-    @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, i) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -110,7 +109,7 @@ public class MT6735 extends RIL implements CommandsInterface {
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, i);
                 return;
         }
         switch(response) {
@@ -269,7 +268,6 @@ public class MT6735 extends RIL implements CommandsInterface {
         return response;
     }
 
-    @Override
     public void
     setupDataCall(String radioTechnology, String profile, String apn,
             String user, String password, String authType, String protocol,
@@ -390,9 +388,8 @@ public class MT6735 extends RIL implements CommandsInterface {
     }
 
     // Solicited request handling
-    @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited (Parcel p, int i) {
         int serial, error;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         serial = p.readInt();
@@ -433,7 +430,7 @@ public class MT6735 extends RIL implements CommandsInterface {
             p.setDataPosition(dataPosition);
 
             // Forward responses that we are not overriding to the super class
-            return super.processSolicited(p);
+            return super.processSolicited(p, i);
         }
 
 
